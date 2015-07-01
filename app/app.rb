@@ -89,6 +89,10 @@ class BookmarkManager < Sinatra::Base
     erb :'users/recovery_sent'
   end
 
+  get '/users/password_reset/token' do
+    erb :'/users/recover'
+  end
+
   helpers do
 
     def current_user
