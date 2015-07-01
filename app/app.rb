@@ -62,12 +62,6 @@ class BookmarkManager < Sinatra::Base
     erb :'sessions/new'
   end
 
-  delete '/sessions' do
-    session.clear
-    erb :'sessions/goodbye'
-  end
-
-
   post '/sessions' do
     user = User.authenticate(email: params[:email], password: params[:password])
     if user
@@ -77,6 +71,22 @@ class BookmarkManager < Sinatra::Base
       flash[:errors] = ['The email or password is incorrect']
       erb :'sessions/new'
     end
+  end
+
+  delete '/sessions' do
+    session.clear
+    erb :'sessions/goodbye'
+  end
+
+  get '/password_reset' do
+    erb :'users/password_reset'
+  end
+
+  post '/password_reset' do
+    user = User.first(email: params[:email]) # find the record of the user that's recovering the password.
+    user.password_token = "DMFYOMLYCESXAFPYFRATHPTKLULDPOVIHUIOZIIPSRLCQV" # Here we've got a hard-coded password recovery token.
+    user.save
+    erb :'users/recovery_sent'
   end
 
   helpers do
