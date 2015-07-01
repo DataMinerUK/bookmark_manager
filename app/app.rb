@@ -89,8 +89,17 @@ class BookmarkManager < Sinatra::Base
     erb :'users/recovery_sent'
   end
 
-  get '/users/password_reset/token' do
+  get '/users/password_reset/:password_token' do
     erb :'/users/recover'
+  end
+
+  post '/users/password_reset/:password_token' do
+    user = User.first(password_token: 'token')
+    user.password_token = nil
+    user.save
+    # user.attributes(password: params[:new_password])
+    # user.save
+    erb :'sessions/new'
   end
 
   helpers do

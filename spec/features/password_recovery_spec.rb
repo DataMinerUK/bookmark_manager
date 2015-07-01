@@ -22,4 +22,17 @@ feature 'Password reset' do
     expect(page).to have_content 'Enter a new password'
   end
 
+  scenario "amend users password" do
+    user = User.create(email: 'test@test.com',
+                       password: 'secret1234',
+                       password_confirmation: 'secret1234',
+                       password_token: 'token')
+    visit "/users/password_reset/token"
+    fill_in 'new_password', with: 'another_secret'
+    click_button 'Reset'
+    updated_user = User.first(email: 'test@test.com')
+    expect(updated_user.password_token).to be_nil
+    # expect(updated_user.password_digest).not_to eq(user.password_digest)
+  end
+
 end
