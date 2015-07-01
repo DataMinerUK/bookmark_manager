@@ -32,7 +32,7 @@ feature 'Password reset' do
     click_button 'Reset'
     updated_user = User.first(email: 'test@test.com')
     expect(updated_user.password_token).to be_nil
-    # expect(updated_user.password_digest).not_to eq(user.password_digest)
+    expect(updated_user.password_digest).not_to eq(user.password_digest)
   end
 
 end
