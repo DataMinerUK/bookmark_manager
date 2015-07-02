@@ -2,10 +2,14 @@ require 'mailgun'
 
 class SendResetEmail
 
-  CLIENT = RestClient
+  @@client = RestClient
+
+  def self.change_client(client)
+    @@client = client
+  end
 
   def self.call user
-    CLIENT.post "https://api:#{ENV['mailgun_api']}"\
+    @@client.post "https://api:#{ENV['mailgun_api']}"\
     "@api.mailgun.net/v3/sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org/messages",
     email_contents(user)
   end

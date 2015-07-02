@@ -48,3 +48,4 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/bookmark
 * Watch out when you validate confirmation of a table column in DataMapper. You have to validate every time you change the database, even if you are just updating an existing record. See the [User model](https://github.com/DataMinerUK/bookmark_manager/blob/master/app/models/user.rb#L21)
 * Bcrypt has a weird [syntax](https://github.com/DataMinerUK/bookmark_manager/blob/master/app/models/user.rb#L28) for checking user password input to password digests in the database
 * Information security in software is of the utmost importance. Read about salted password hashing [here](https://crackstation.net/hashing-security.htm)
+* Instead of changing constants in a class, use class variables. See [send_reset_email.rb](https://github.com/DataMinerUK/bookmark_manager/blob/master/lib/send_reset_email.rb#L5-L12)
