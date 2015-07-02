@@ -1,3 +1,4 @@
+require 'securerandom'
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/flash'
@@ -84,7 +85,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/password_reset' do
     user = User.first(email: params[:email]) # find the record of the user that's recovering the password.
-    user.password_token = "DMFYOMLYCESXAFPYFRATHPTKLULDPOVIHUIOZIIPSRLCQV" # Here we've got a hard-coded password recovery token.
+    user.password_token = generate_token
     user.save
     erb :'users/recovery_sent'
   end
@@ -105,6 +106,10 @@ class BookmarkManager < Sinatra::Base
 
     def current_user
       @user ||= User.first(id: session[:user_id]) if session[:user_id]
+    end
+
+    def generate_token
+      SecureRandom.hex
     end
 
   end
