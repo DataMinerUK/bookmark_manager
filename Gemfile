@@ -6,6 +6,7 @@ ruby '2.2.2'
   gem 'bcrypt'
   gem 'data_mapper'
   gem 'dm-postgres-adapter'
+  gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
   gem 'sinatra'
   gem 'sinatra-flash'
 

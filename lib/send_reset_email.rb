@@ -1,20 +1,25 @@
+require 'mailgun'
+
 class SendResetEmail
 
-  def initialize user:, client:
-    @user = user
-    @email_client = client
-  end
 
-  def call
-    @email_client.send_message(email_contents)
+  def self.call user
+    RestClient.post "https://api:#{ENV['mailgun_api']}"\
+    "@api.mailgun.net/v3/sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org/messages",
+    email_contents(user)
   end
 
   private
 
-  def email_contents
-    {to:      @user.email,
-    message: "You have requested a password reset. Follow this link to continue:
-      http://www.bookmarkmanager.com/password_reset/#{@user.password_token}"}
+  def self.email_contents user
+    {from:   "Mailgun Sandbox <postmaster@sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org>",
+    to:      user.email,
+    subject: "Bookmark Manager password reset",
+    text:    "You have requested a password reset. Follow this link to continue:
+      http://www.bookmarkmanager.com/password_reset/#{user.password_token}"}
   end
 
 end
+
+# email_client = Mailgun::Client.new ENV["mailgun_api"]
+# email_client.send_message "@api.mailgun.net/v3/sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org/messages", email_contents
