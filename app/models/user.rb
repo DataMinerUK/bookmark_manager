@@ -8,7 +8,7 @@ class User
   attr_reader :password
   attr_accessor :password_confirmation
 
-  validates_confirmation_of :password
+  validates_confirmation_of :password # , confirm => password_confirmation
   # validates_uniqueness_of :email ## No longer needed as we have set email to have a unique index with unique: true
 
   property :id, Serial
@@ -16,9 +16,10 @@ class User
   property :password_digest, Text, :lazy => false
   property :password_token, Text, :lazy => false
 
-  def password=(password)
-    @password = password
-    self.password_digest = BCrypt::Password.create(password)
+  def password=(pass)
+    @password = pass
+    @password_confirmation = pass unless new?
+    self.password_digest = BCrypt::Password.create(pass)
   end
 
   def self.authenticate(email:, password:) # clearly there is an issue here.. but let's wait until we have a test that targets it

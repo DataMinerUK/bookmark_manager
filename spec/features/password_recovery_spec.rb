@@ -30,7 +30,9 @@ feature 'Password reset' do
     visit "/users/password_reset/token"
     fill_in 'new_password', with: 'another_secret'
     click_button 'Reset'
+    # p user
     updated_user = User.first(email: 'test@test.com')
+    # p updated_user
     expect(updated_user.password_token).to be_nil
     expect(updated_user.password_digest).not_to eq(user.password_digest)
   end

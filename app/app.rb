@@ -95,8 +95,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/users/password_reset/:password_token' do
     user = User.first(password_token: params[:password_token])
-    user.password_digest = nil
-    user.password == params[:new_password]
+    user.password = params[:new_password]
     user.password_token = nil
     user.save
     erb :'sessions/new'
