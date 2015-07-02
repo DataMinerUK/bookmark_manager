@@ -1,10 +1,10 @@
 # Bookmark Manager
 
-This is a web app using [Sinatra](http://www.sinatrarb.com/). There is a [Postgresql](http://www.postgresql.org/) database implementation using DataMapper. Units tests use [Rspec](http://rspec.info/). Features tests use [Capybara](http://jnicklas.github.io/capybara/). Mailer uses [Mailgun](https://mailgun.com). This was built following the MakerAcademy Tutorial [here](https://github.com/makersacademy/course/tree/master/bookmark_manager)
+This is a web app using [Sinatra](http://www.sinatrarb.com/). There is a [Postgresql](http://www.postgresql.org/) database implementation using [DataMapper](http://datamapper.org/). Units tests use [Rspec](http://rspec.info/). Features tests use [Capybara](http://jnicklas.github.io/capybara/). Mailer uses [Mailgun](https://mailgun.com). This was built following this [MakersAcademy Tutorial](https://github.com/makersacademy/course/tree/master/bookmark_manager)
 
 ## Getting Started
 
-Sign up for a Mailgun account [here](https://mailgun.com) and get your API key. I work off a vagrant VM whose Vagrantfile you can find [here](https://github.com/DataMinerUK/MakersAcademy-VM). So when running this from my VM:
+Sign up for a Mailgun account [here](https://mailgun.com) and get your API key. I work off a vagrant VM whose Vagrantfile you can find [here](https://github.com/DataMinerUK/MakersAcademy-VM). So when running this from the VM:
 
 On the command line
 ```bash
@@ -23,7 +23,7 @@ To check run the version locally
 ```bash
 rackup -p4567 --host 0.0.0.0
 ```
-and check localhost:4567 on my machine.
+and go to localhost:4567 on your machine.
 
 ### To deploy to Heroku
 
