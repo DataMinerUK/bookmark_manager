@@ -1,3 +1,5 @@
+require './lib/send_reset_email'
+
 feature 'Password reset' do
 
   scenario 'requesting a password reset' do
@@ -5,6 +7,7 @@ feature 'Password reset' do
                        password_confirmation: 'secret1234')
     visit '/password_reset'
     fill_in 'email', with: user.email
+    expect(SendResetEmail).to receive(:call)
     click_button 'Reset password'
     user = User.first(email: user.email)
     expect(user.password_token).not_to be_nil

@@ -3,6 +3,7 @@ require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/flash'
 require './app/data_mapper_setup'
+require './lib/send_reset_email'
 
 class BookmarkManager < Sinatra::Base
 
@@ -87,6 +88,7 @@ class BookmarkManager < Sinatra::Base
     user = User.first(email: params[:email]) # find the record of the user that's recovering the password.
     user.password_token = generate_token
     user.save
+    SendResetEmail.call(user)
     erb :'users/recovery_sent'
   end
 
