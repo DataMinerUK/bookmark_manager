@@ -18,7 +18,7 @@ class User
 
   def password=(pass)
     @password = pass
-    @password_confirmation = pass unless new?
+    @password_confirmation = pass unless new? # password validation is now built into the DB model and so we need to validate before we can update any record
     self.password_digest = BCrypt::Password.create(pass)
   end
 
