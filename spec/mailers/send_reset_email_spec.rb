@@ -2,8 +2,9 @@ require './lib/send_reset_email'
 
 describe SendResetEmail do
 
-  let(:user)         { double :user, password_token: '4nknkj34nkj23n4j32', email:
-                 "user@example.com" }
+  let(:user) { double :user,
+                password_token: '4nknkj34nkj23n4j32',
+                email: "user@example.com" }
   let(:email_client) { double :email_client, post: :recovery_message }
   subject { SendResetEmail }
 

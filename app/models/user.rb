@@ -33,7 +33,4 @@ class User
     end
   end
 
-  def self.password_token
-  end
-
 end
