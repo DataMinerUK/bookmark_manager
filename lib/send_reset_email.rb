@@ -6,7 +6,8 @@ class SendResetEmail
 
   def self.call user
     CLIENT.post "https://api:#{ENV['mailgun_api']}"\
-    "@api.mailgun.net/v3/sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org/messages", email_contents(user)
+    "@api.mailgun.net/v3/sandbox8a194822b88f467e809f01cbd74859f3.mailgun.org/messages",
+    email_contents(user)
   end
 
   private
