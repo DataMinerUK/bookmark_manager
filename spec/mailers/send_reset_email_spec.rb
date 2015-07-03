@@ -9,7 +9,7 @@ describe SendResetEmail do
   subject { SendResetEmail }
 
   it 'passes a recovery message to an email client' do
-    SendResetEmail.change_client(email_client)
+    SendResetEmail.client = email_client
     expect(subject.call(user)).to eq :recovery_message
   end
 end
